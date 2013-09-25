@@ -1,6 +1,6 @@
 {
   "name": "talker-notifier",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pop up growl notifications for messages in a given Talker Room",
   "main": "index.js",
   "bin": {
