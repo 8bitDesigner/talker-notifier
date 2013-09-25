@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var Talker = require('talker-client')
   , growl  = require('growl')
   , client = new Talker({ token: process.env.TALKER_API_TOKEN })
