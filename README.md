@@ -6,5 +6,6 @@
 ## Usage
 
 ``` shell
-TALKER_API_TOKEN=[your api token here] talker-notifier [ID of your room] [your email address]
+export TALKER_API_TOKEN=[your api token here]
+talker-notifier --room [ID of your room] --email [your email address]
 ```
