@@ -2,10 +2,18 @@
 
 var Talker = require('talker-client')
   , growl  = require('growl')
-  , client = new Talker({ token: process.env.TALKER_API_TOKEN })
-  , email  = process.argv.pop()
-  , room   = process.argv.pop()
-  , retry  = 5
+  , token  = process.env.TALKER_API_TOKEN
+  , args   = require('optimist').argv
+  , room   = args.r || args.room || args._[0]
+  , email  = args.e || args.email || args._[1]
+  , retry  = args.t || args.timeout || 5
+  , client
+
+function usage(msg) {
+  if (msg) { console.log(msg) }
+  console.log('Usage: talker-notifier --room [room ID] [ --email [optional email address] ]')
+  process.exit(1)
+}
 
 function logger() {
   var args = Array.prototype.slice.call(arguments)
@@ -47,4 +55,10 @@ function connect(roomId, email) {
   })
 }
 
+// Make sure we have what we need to connect
+if (!token) { usage('No API token found - use `export TALKER_API_TOKEN=[your api token]` to set one') }
+if (!room)  { usage('No room ID given') }
+
+// Create a new client and start connecting
+client = new Talker({ token: process.env.TALKER_API_TOKEN })
 connect(room, email)
